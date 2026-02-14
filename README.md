@@ -1,146 +1,57 @@
 # SVG to PNG Converter
 
-フロントエンドのみで動作するシンプルなSVG to PNG変換ツールです。SVGソースコードをテキストエリアに入力し、PNG画像に変換してダウンロードできます。
+SVGコードをPNG画像に変換するシンプルなWebアプリケーションです。ブラウザ上で完結し、サーバー不要で動作します。
 
-## 特徴
+## 🚀 今すぐ試す
 
-- 🚀 **フロントエンドのみで完結** - サーバー不要、ブラウザだけで動作
-- 📦 **依存関係なし** - 外部ライブラリを使用せず、ネイティブWeb APIのみで実装
-- 🎨 **シンプルなUI** - クリーンでモダンなデザイン
-- 📱 **レスポンシブ対応** - モバイル・デスクトップ両対応
-- ⚡ **軽量** - ビルドプロセス不要、合計ファイルサイズ < 20KB
+**GitHub Pagesでホスティング中！インストール不要で、すぐに使えます:**
 
-## 機能
+### **[https://knight9999.github.io/ConvertSVGToPng/](https://knight9999.github.io/ConvertSVGToPng/)**
 
-- SVGソースコードの入力（textarea）
-- SVG → PNG変換
-- PNG画像のダウンロード
-- エラーハンドリングとメッセージ表示
-- レスポンシブデザイン
+上記のURLにアクセスするだけで、すぐに使い始められます。
 
 ## 使い方
 
-### ローカルでの実行
+1. **上記のURLにアクセス**
 
-1. リポジトリをクローン:
-   ```bash
-   git clone <repository-url>
-   cd ConvertSVGtoPng
-   ```
+2. **SVGコードを入力**
 
-2. `index.html` をブラウザで開く:
-   - ダブルクリックで開く
-   - または、ローカルサーバーを起動:
-     ```bash
-     # Python 3の場合
-     python3 -m http.server 8000
-
-     # Node.jsの場合
-     npx serve
-     ```
-
-3. SVGコードを入力:
+   テキストエリアにSVGコードを貼り付けます。例：
    ```svg
    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
      <circle cx="100" cy="100" r="80" fill="#3498db"/>
    </svg>
    ```
 
-4. 「変換」ボタンをクリック
+3. **「変換」ボタンをクリック**
 
-5. 「PNGダウンロード」ボタンで画像を保存
+   変換されたPNG画像がプレビュー表示されます。
 
-## 技術スタック
+4. **「PNGダウンロード」ボタンをクリック**
 
-- **HTML5** - セマンティックHTML
-- **CSS3** - CSS変数、Flexbox、レスポンシブデザイン
-- **JavaScript (ES6+)** - クラス構文、Promise、async/await
-- **Canvas API** - SVGのラスタライズとPNG変換
-- **Blob API** - ファイルダウンロード
+   PNG画像がダウンロードされます（ファイル名：`converted_YYYYMMDDHHmmss.png`）
 
-## ブラウザ対応
+## 特徴
 
-以下のモダンブラウザに対応しています:
+- ✨ **インストール不要** - ブラウザだけで動作
+- 🔒 **プライバシー保護** - データはブラウザ内だけで処理され、外部に送信されません
+- 📦 **軽量** - 外部ライブラリなし、高速動作
+- 📱 **レスポンシブ** - スマートフォン・タブレット・PCに対応
 
-- ✅ Chrome / Edge（最新版）
-- ✅ Firefox（最新版）
-- ✅ Safari（最新版）
+## ローカルで実行する場合
 
-必要なブラウザ機能:
-- Canvas API
-- Blob API
-- Promise / async-await
-- ES6 Class構文
+リポジトリをクローンして、`index.html` をブラウザで開くだけです：
 
-## ファイル構成
-
-```
-ConvertSVGtoPng/
-├── index.html          # メインHTMLファイル
-├── script.js           # JavaScriptロジック
-├── style.css           # スタイルシート
-├── README.md           # このファイル
-└── .gitignore          # Git除外設定
+```bash
+git clone https://github.com/knight9999/ConvertSVGToPng.git
+cd ConvertSVGToPng
+open index.html
 ```
 
-## 変換アルゴリズム
+## 技術情報
 
-1. **SVGソースをBlobに変換** - SVGテキストをSVG MIMEタイプのBlobに変換
-2. **オブジェクトURL生成** - Blobからブラウザ内の一時URLを生成
-3. **Image要素として読み込み** - SVGをビットマップとして読み込み
-4. **Canvasに描画** - Canvas APIでSVGをラスタライズ
-5. **PNGエクスポート** - CanvasをPNG形式のBlobに変換
-6. **ダウンロード** - `<a>`要素を動的に生成してダウンロード
-
-## エラーハンドリング
-
-以下のエラーケースに対応しています:
-
-- 空の入力
-- 無効なSVG構文
-- Canvas変換エラー
-- メモリ不足（巨大なSVG）
-
-エラーメッセージは分かりやすく表示され、ユーザーに適切なフィードバックを提供します。
-
-## デプロイ方法
-
-### GitHub Pages
-
-1. GitHubリポジトリにプッシュ
-2. Settings → Pages → Source: `main` branch
-3. 公開URLでアクセス可能
-
-### 静的ホスティングサービス
-
-- [Netlify](https://www.netlify.com/)
-- [Vercel](https://vercel.com/)
-- [Cloudflare Pages](https://pages.cloudflare.com/)
-
-ビルド不要で直接デプロイ可能です。
-
-## セキュリティ
-
-- SVGは`Image`要素として読み込むため、SVG内のスクリプトは実行されません
-- ユーザーデータはブラウザ内でのみ処理され、外部に送信されません
-- サーバー不要のため、データ漏洩リスクなし
+開発者向けの詳細情報は [DEV_NOTE.md](DEV_NOTE.md) を参照してください。
 
 ## ライセンス
 
 MIT License
-
-## 開発者
-
-このプロジェクトはフロントエンド学習とCanvas APIの実践を目的として作成されました。
-
-## 貢献
-
-プルリクエストやイシューの報告は歓迎します。
-
-## 今後の拡張案
-
-- [ ] プレビュー機能
-- [ ] カスタム解像度設定
-- [ ] 複数形式対応（JPEG, WebP）
-- [ ] バッチ変換
-- [ ] ダークモード
