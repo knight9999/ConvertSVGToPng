@@ -86,6 +86,7 @@ class UI {
   initElements() {
     this.svgInput = document.getElementById('svg-input');
     this.convertBtn = document.getElementById('convert-btn');
+    this.svgDownloadBtn = document.getElementById('svg-download-btn');
     this.downloadBtn = document.getElementById('download-btn');
     this.pngPreview = document.getElementById('png-preview');
     this.errorMsg = document.getElementById('error-message');
@@ -96,7 +97,11 @@ class UI {
    */
   bindEvents() {
     this.convertBtn.addEventListener('click', () => this.handleConvert());
+    this.svgDownloadBtn.addEventListener('click', () => this.handleSvgDownload());
     this.downloadBtn.addEventListener('click', () => this.handleDownload());
+
+    // TextAreaの入力に応じてSVGダウンロードボタンの有効/無効を切り替え
+    this.svgInput.addEventListener('input', () => this.updateSvgDownloadButton());
   }
 
   /**
@@ -136,6 +141,50 @@ class UI {
       // 変換ボタンを再度有効化
       this.convertBtn.disabled = false;
     }
+  }
+
+  /**
+   * SVGダウンロードボタンのクリックハンドラ
+   */
+  handleSvgDownload() {
+    const svgSource = this.svgInput.value.trim();
+    if (!svgSource) {
+      this.showError('SVGコードを入力してください');
+      return;
+    }
+
+    // 現在日時を取得してファイル名を生成
+    const now = new Date();
+    const year = now.getFullYear();
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const day = String(now.getDate()).padStart(2, '0');
+    const hours = String(now.getHours()).padStart(2, '0');
+    const minutes = String(now.getMinutes()).padStart(2, '0');
+    const seconds = String(now.getSeconds()).padStart(2, '0');
+    const filename = `figure_${year}${month}${day}${hours}${minutes}${seconds}.svg`;
+
+    // SVGをBlobとして作成
+    const svgBlob = new Blob([svgSource], {
+      type: 'image/svg+xml;charset=utf-8'
+    });
+
+    // ダウンロード用のリンクを生成
+    const url = URL.createObjectURL(svgBlob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    URL.revokeObjectURL(url);
+  }
+
+  /**
+   * SVGダウンロードボタンの有効/無効を更新
+   */
+  updateSvgDownloadButton() {
+    const svgSource = this.svgInput.value.trim();
+    this.svgDownloadBtn.disabled = !svgSource;
   }
 
   /**
