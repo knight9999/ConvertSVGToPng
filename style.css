@@ -55,6 +55,14 @@ h1 {
   margin-bottom: 10px;
 }
 
+.logo {
+  width: 100px;
+  height: auto;
+  margin-bottom: 15px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
 .description {
   color: var(--secondary-color);
   font-size: 1rem;
