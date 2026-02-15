@@ -37,6 +37,13 @@
 
      # Node.jsの場合
      npx serve
+     
+     # expressをインストールして利用する場合
+     npm install
+     # Expressサーバーを起動 (ポート 3000、ブラウザ自動起動)
+     npm start
+     # Expressサーバーを起動（ポート 8080、ブラウザは自動起動しない）
+     npm start -- --port=8080 --no-browser
      ```
 
 3. SVGコードを入力:
@@ -139,8 +146,5 @@ MIT License
 
 ## 今後の拡張案
 
-- [ ] プレビュー機能
 - [ ] カスタム解像度設定
 - [ ] 複数形式対応（JPEG, WebP）
-- [ ] バッチ変換
-- [ ] ダークモード
