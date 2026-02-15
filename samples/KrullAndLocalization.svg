@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 320" width="400" height="320">
+<rect width="100%" height="100%" fill="white"/>
+  <!-- Define styles -->
+  <defs>
+    <style>
+      .node {
+        font-size: 24px;
+        font-family: "Times New Roman", serif;
+        font-style: italic;
+      }
+      .arrow {
+        stroke: black;
+        stroke-width: 2;
+        fill: none;
+        marker-end: url(#arrowhead);
+      }
+      .label {
+        font-size: 18px;
+        font-family: "Times New Roman", serif;
+        font-style: italic;
+      }
+      .existence {
+        stroke-dasharray: 5,5;
+      }
+    </style>
+    <marker id="arrowhead" markerWidth="10" markerHeight="10" refX="9" refY="3" orient="auto">
+      <polygon points="0 0, 10 3, 0 6" fill="black" />
+    </marker>
+  </defs>
+
+  <!-- Title -->
+
+<text x="200" y="25" text-anchor="middle" font-size="20" font-family="serif">Krull's Theorem and </text>
+<text x="200" y="47" text-anchor="middle" font-size="20" font-family="serif">Universality of S^{-1}A </text>
+
+  <!-- Nodes -->
+
+  <!-- A (top left) -->
+
+<text x="80" y="100" class="node" text-anchor="middle">A</text>
+
+  <!-- Â (top right) -->
+
+<text x="320" y="100" class="node" text-anchor="middle">Â</text>
+
+  <!-- S^{-1}A (bottom, directly below A) -->
+
+<text x="80" y="240" class="node" text-anchor="middle">S</text>
+<text x="80" y="240" class="node" text-anchor="middle" dy="-8" dx="16" style="font-size:14px;">−1</text>
+<text x="80" y="240" class="node" text-anchor="middle" dx="32">A</text>
+
+  <!-- Arrows -->
+
+  <!-- f: A → Â -->
+
+  <path d="M 100 95 L 300 95" class="arrow"/>
+  <text x="200" y="85" class="label" text-anchor="middle">f</text>
+
+  <!-- φ: A → S^{-1}A (vertical) -->
+
+  <path d="M 80 115 L 80 220" class="arrow"/>
+  <text x="55" y="170" class="label" text-anchor="middle">φ</text>
+
+  <!-- g: S^{-1}A → Â (dashed, showing existence) -->
+
+  <path d="M 125 225 L 300 110" class="arrow existence"/>
+  <text x="230" y="184" class="label" text-anchor="middle">
+    <tspan font-style="normal">∃!</tspan>
+    <tspan> g</tspan>
+  </text>
+
+  <!-- Conditions -->
+
+  <text x="200" y="240" font-size="14" text-anchor="left" font-family="serif">
+    <tspan x="180" dy="0em">a is an ideal of A. </tspan>
+    <tspan x="180" dy="1.2em">Â is a-adic completion of A. </tspan>
+    <tspan x="180" dy="1.2em">S is multiplicatively closed set </tspan>
+    <tspan x="190" dy="1.2em"> and S = 1 + a.</tspan>
+  </text>
+
+</svg>

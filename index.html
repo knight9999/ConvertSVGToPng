@@ -14,27 +14,34 @@
       <p class="description">SVGコードを入力してPNG画像に変換</p>
     </header>
 
-    <main>
-      <div class="input-section">
-        <label for="svg-input">SVGコード:</label>
-        <textarea
-          id="svg-input"
-          placeholder="<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;200&quot; height=&quot;200&quot;>&#10;  <circle cx=&quot;100&quot; cy=&quot;100&quot; r=&quot;80&quot; fill=&quot;#3498db&quot;/>&#10;</svg>"
-          spellcheck="false"
-        ></textarea>
+    <main class="main-layout">
+      <div class="editor-column">
+        <div class="input-section">
+          <label for="svg-input">SVGコード:</label>
+          <textarea
+            id="svg-input"
+            placeholder="<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; width=&quot;200&quot; height=&quot;200&quot;>&#10;  <circle cx=&quot;100&quot; cy=&quot;100&quot; r=&quot;80&quot; fill=&quot;#3498db&quot;/>&#10;</svg>"
+            spellcheck="false"
+          ></textarea>
+        </div>
+
+        <div class="button-group">
+          <button id="convert-btn" class="btn btn-primary">変換</button>
+          <button id="svg-download-btn" class="btn btn-secondary" disabled>SVGダウンロード</button>
+          <button id="download-btn" class="btn btn-secondary" disabled>PNGダウンロード</button>
+        </div>
+
+        <div id="error-message" class="message"></div>
+
+        <div class="preview-section">
+          <img id="png-preview" alt="PNG Preview" />
+        </div>
       </div>
 
-      <div class="button-group">
-        <button id="convert-btn" class="btn btn-primary">変換</button>
-        <button id="svg-download-btn" class="btn btn-secondary" disabled>SVGダウンロード</button>
-        <button id="download-btn" class="btn btn-secondary" disabled>PNGダウンロード</button>
-      </div>
-
-      <div id="error-message" class="message"></div>
-
-      <div class="preview-section">
-        <img id="png-preview" alt="PNG Preview" />
-      </div>
+      <aside class="samples-panel" aria-labelledby="samples-title">
+        <h2 id="samples-title">Samples</h2>
+        <div id="samples-list" class="samples-list"></div>
+      </aside>
     </main>
 
     <footer>

@@ -1,0 +1,17 @@
+{
+  "name": "convertsvgtopng",
+  "version": "1.0.0",
+  "description": "SVG to PNG Converter with Express server",
+  "type": "module",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "keywords": ["svg", "png", "converter"],
+  "author": "",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "open": "^10.0.3"
+  }
+}

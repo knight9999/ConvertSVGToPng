@@ -40,11 +40,42 @@ SVGコードをPNG画像に変換するシンプルなWebアプリケーショ�
 
 ## ローカルで実行する場合
 
-リポジトリをクローンして、`index.html` をブラウザで開くだけです：
+### 方法1: 開発サーバーを使用 (推奨)
+
+リポジトリをクローンして、開発サーバーを起動します：
 
 ```bash
 git clone https://github.com/knight9999/ConvertSVGToPng.git
 cd ConvertSVGToPng
+
+# 依存パッケージをインストール
+npm install
+
+# サーバーを起動 (ポート 3000、ブラウザ自動起動)
+npm start
+```
+
+サーバーが起動すると、自動的にブラウザで `http://localhost:3000` が開きます。
+
+#### コマンドラインオプション
+
+```bash
+# ポート番号を指定 (例: 8080)
+npm start -- --port=8080
+
+# ブラウザの自動起動を無効化
+npm start -- --no-browser
+
+# 複数のオプションを組み合わせ
+npm start -- --port=8080 --no-browser
+```
+
+### 方法2: ブラウザで直接開く
+
+開発サーバーなしで動作させる場合は、`index.html` をブラウザで開くこともできます。
+ただし、この場合はサンプル機能 (Samples パネル) が CORS 制約により動作しません。
+
+```bash
 open index.html
 ```
 

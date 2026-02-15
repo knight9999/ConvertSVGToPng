@@ -78,6 +78,7 @@ class UI {
     this.pngBlob = null;
     this.initElements();
     this.bindEvents();
+    this.loadSamples();
   }
 
   /**
@@ -90,6 +91,7 @@ class UI {
     this.downloadBtn = document.getElementById('download-btn');
     this.pngPreview = document.getElementById('png-preview');
     this.errorMsg = document.getElementById('error-message');
+    this.samplesList = document.getElementById('samples-list');
   }
 
   /**
@@ -102,6 +104,104 @@ class UI {
 
     // TextAreaの入力に応じてSVGダウンロードボタンの有効/無効を切り替え
     this.svgInput.addEventListener('input', () => this.updateSvgDownloadButton());
+  }
+
+  /**
+   * サンプル一覧を読み込んで表示
+   */
+  async loadSamples() {
+    if (!this.samplesList) return;
+
+    try {
+      const response = await fetch('samples/index.json', { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error('サンプル一覧の読み込みに失敗しました');
+      }
+      const samples = await response.json();
+      if (!Array.isArray(samples)) {
+        throw new Error('サンプル一覧の形式が正しくありません');
+      }
+      this.renderSamples(samples);
+    } catch (error) {
+      this.renderSamplesError(error.message);
+    }
+  }
+
+  /**
+   * サンプル一覧を描画
+   * @param {Array<{file: string, description?: string}>} samples
+   */
+  renderSamples(samples) {
+    this.samplesList.innerHTML = '';
+    if (samples.length === 0) {
+      this.samplesList.textContent = 'サンプルがありません';
+      return;
+    }
+
+    samples.forEach(sample => {
+      const card = document.createElement('div');
+      card.className = 'sample-card';
+
+      const img = document.createElement('img');
+      img.className = 'sample-thumb';
+      img.src = `samples/${sample.file}`;
+      img.alt = sample.description ? sample.description : sample.file;
+      img.loading = 'lazy';
+
+      const title = document.createElement('div');
+      title.className = 'sample-title';
+      title.textContent = sample.description ? sample.description : sample.file;
+
+      const fileName = document.createElement('div');
+      fileName.className = 'sample-desc';
+      fileName.textContent = sample.file;
+
+      const loadBtn = document.createElement('button');
+      loadBtn.className = 'btn btn-secondary sample-load-btn';
+      loadBtn.textContent = 'ロード';
+      loadBtn.addEventListener('click', () => this.handleSampleLoad(sample));
+
+      card.appendChild(img);
+      card.appendChild(title);
+      card.appendChild(fileName);
+      card.appendChild(loadBtn);
+      this.samplesList.appendChild(card);
+    });
+  }
+
+  /**
+   * サンプル読み込み時のエラー表示
+   * @param {string} message
+   */
+  renderSamplesError(message) {
+    this.samplesList.innerHTML = '';
+    const error = document.createElement('div');
+    error.className = 'sample-desc';
+    error.textContent = message;
+    this.samplesList.appendChild(error);
+  }
+
+  /**
+   * サンプルのロード処理
+   * @param {{file: string, description?: string}} sample
+   */
+  async handleSampleLoad(sample) {
+    const label = sample.description ? sample.description : sample.file;
+    const confirmed = confirm(`「${label}」を読み込みますか？`);
+    if (!confirmed) return;
+
+    try {
+      const response = await fetch(`samples/${sample.file}`, { cache: 'no-store' });
+      if (!response.ok) {
+        throw new Error('サンプルSVGの読み込みに失敗しました');
+      }
+      const svgText = await response.text();
+      this.svgInput.value = svgText;
+      this.updateSvgDownloadButton();
+      this.showSuccess('サンプルを読み込みました');
+    } catch (error) {
+      this.showError(error.message);
+    }
   }
 
   /**
